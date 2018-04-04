@@ -40,7 +40,7 @@ docker run -d --rm --name hub1 -p 6364:6363 -p 6365:6363/udp hub
 > docker run -d --rm --name hub1 -p 6363:6363 -p 6363:6363/udp hub
 > ```
 
-### Register routes
+### Creating faces
 
 You can create faces from your local machine towards conatiner (this will only work if container was started with ports exposing, as described above):
 
@@ -55,7 +55,7 @@ Or vice versa:
 docker exec hub1 nfdc face create udp://<ip-address>
 ```
 
-### Start with custom config file
+### Custom config file
 
 To start NDN container with custom config file, copy your config file to designated folder and mount it into the container:
 
@@ -65,7 +65,7 @@ cp <path-to-config>/nfd.conf conf/
 docker run -d --rm --name hub1 -v $(pwd)/conf:/cong -e CONFIG=/conf/nfd.conf hub
 ```
 
-## Start with saving log to host machine
+### Saving log to host machine
 
 To save log file to a host machine, mount logs folder into a designated folder on a host machine:
 
@@ -78,5 +78,5 @@ docker run -d --rm --name hub1 -v $(pwd)/logs:/logs hub
 > ```
 > mkdir conf logs
 > cp <path-to-config>/nfd.conf conf/
-> docker run -d --rm --name hub1 -p 6364:6363 -p 6365:6363/udp -v $(pwd)/logs:/logs -v $(pwd)/conf:/cong -e CONFIG=/conf/nfd.conf hub
+> docker run -d --rm --name hub1 -p 6364:6363 -p 6365:6363/udp -v $(pwd)/logs:/logs -v $(pwd)/conf:/conf -e CONFIG=/conf/nfd.conf hub
 > ```
