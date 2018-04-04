@@ -41,6 +41,10 @@ RUN cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf \
 RUN mkdir /share \
     && mkdir /logs
 
+# cleanup
+RUN apt autoremove \
+    && apt-get remove -y git build-essential python pkg-config
+
 EXPOSE 6363/tcp
 EXPOSE 6363/udp
 
