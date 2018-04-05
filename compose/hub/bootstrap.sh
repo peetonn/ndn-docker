@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "" > $ENTRYPOINT_LOG
 echo "" > $BOOTSTRAP_LOG
 
 NFD_START_FG_CMD="nfd > ${LOG_FILE} 2>&1"
@@ -64,10 +65,9 @@ if [[ ! -z $register ]]; then
 fi
 
 if [[ ! -z "$execute" ]]; then
-    runCmd "$execute"
+    eval "$execute"  >> $ENTRYPOINT_LOG 2>&1
 fi
 
 if [ "$nfdBackground" == "no" ]; then
-    runCmd "tail -f ${LOG_FILE}"
+    eval "tail -f ${LOG_FILE}" >> $ENTRYPOINT_LOG 2>&1
 fi
-

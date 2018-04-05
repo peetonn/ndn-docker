@@ -7,10 +7,11 @@ RUN mkdir -p /configs /generated \
     && chmod +x /usr/bin/bootstrap.sh
 
 ENV BOOTSTRAP_LOG=/generated/bootstrap.log
+ENV ENTRYPOINT_LOG=/generated/entrypoint.log
 ENV LOG_FILE=/generated/nfd.log
 ENV NFD_BACKGROUND=yes
 ENV REGISTER=""
 ENV ENTRYPOINT=""
 
 WORKDIR /
-CMD bootstrap.sh -b $NFD_BACKGROUND -r $REGISTER -e "$ENTRYPOINT"
+CMD bootstrap.sh -b $NFD_BACKGROUND -r $REGISTER -e "${ENTRYPOINT}"
