@@ -80,3 +80,20 @@ docker run -d --rm --name hub1 -v $(pwd)/logs:/logs hub
 > cp <path-to-config>/nfd.conf conf/
 > docker run -d --rm --name hub1 -p 6364:6363 -p 6365:6363/udp -v $(pwd)/logs:/logs -v $(pwd)/conf:/conf -e CONFIG=/conf/nfd.conf hub
 > ```
+
+## ndnping example
+
+* Start ndnping sever:
+```
+docker network create -d bridge ndn
+docker run -d --rm --name pingserver --network ndn peetonn/ndn-docker:latest 
+docker exec -d pingserver ndnpingserver nnd:/ndn-docker/test
+```
+
+* Start ndnping client:
+```
+docker run -d --rm --name pingclient --network ndn peetonn/ndn-docker:latest
+faceId=`docker exec pingclient nfdc face create udp://pingserver | sed "s/^face-created id=\([0-9][0-9]*\) .*$/\1/g"`
+docker exec pingclient nfdc route add /ndn-docker $faceId 
+docker exec -ti pingclient ndnping /ndn-docker/test
+```
