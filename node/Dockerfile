@@ -31,6 +31,15 @@ RUN git clone --recursive https://github.com/named-data/NFD \
     && cd .. \
     && rm -Rf NFD
 
+# install ndn-tools
+RUN git clone --recursive https://github.com/named-data/ndn-tools.git \
+    && cd ndn-tools \
+    && ./waf configure \
+    && ./waf \
+    && ./waf install \
+    && cd .. \
+    && rm -Rf ndn-tools
+
 # initial configuration
 RUN cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf \
     && ndnsec-keygen /`whoami` | ndnsec-install-cert - \
