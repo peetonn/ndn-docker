@@ -1,0 +1,81 @@
+version: '3'
+services:
+  c1:
+    build: c
+    environment:
+      - REGISTER=h2:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
+    container_name: c1
+    depends_on:
+      - p1
+      - h2
+    volumes:
+      - ./generated/c1:/generated
+  c2:
+    build: c
+    environment:
+      - REGISTER=h2:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
+    container_name: c2
+    depends_on:
+      - p1
+      - h2
+    volumes:
+      - ./generated/c2:/generated
+  c3:
+    build: c
+    environment:
+      - REGISTER=h3:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
+    container_name: c3
+    depends_on:
+      - p1
+      - h3
+    volumes:
+      - ./generated/c3:/generated
+  c4:
+    build: c
+    environment:
+      - REGISTER=h3:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
+    container_name: c4
+    depends_on:
+      - p1
+      - h3
+    volumes:
+      - ./generated/c4:/generated
+  h1:
+    build: h
+    environment:
+      - NFD_BACKGROUND=no
+      - REGISTER=p1:/ndnrtc-test
+    container_name: h1
+    depends_on:
+      - p1
+    volumes:
+      - ./generated/h1:/generated
+  h2:
+    build: h
+    environment:
+      - NFD_BACKGROUND=no
+      - REGISTER=h1:/ndnrtc-test
+    container_name: h2
+    depends_on:
+      - h1
+    volumes:
+      - ./generated/h2:/generated
+  h3:
+    build: h
+    environment:
+      - NFD_BACKGROUND=no
+      - REGISTER=h1:/ndnrtc-test
+    container_name: h3
+    depends_on:
+      - h1
+    volumes:
+      - ./generated/h3:/generated
+  p1:
+    build: p
+    container_name: p1
+    volumes:
+      - ./generated/p1:/generated
