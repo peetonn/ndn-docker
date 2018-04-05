@@ -97,5 +97,3 @@ faceId=`docker exec pingclient nfdc face create udp://pingserver | sed "s/^face-
 docker exec pingclient nfdc route add /ndn-docker $faceId 
 docker exec -ti pingclient ndnping /ndn-docker/test
 ```
-
-> Get `<face-id>` from the previous command output.
