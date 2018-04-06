@@ -87,7 +87,7 @@ docker run -d --rm --name hub1 -v $(pwd)/logs:/logs hub
 ```
 docker network create -d bridge ndn
 docker run -d --rm --name pingserver --network ndn peetonn/ndn-docker:latest 
-docker exec -d pingserver ndnpingserver nnd:/ndn-docker/test
+docker exec -d pingserver ndnpingserver ndn:/ndn-docker/test
 ```
 
 * Start ndnping client:
