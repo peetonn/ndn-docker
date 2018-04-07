@@ -5,79 +5,103 @@ services:
     environment:
       - REGISTER=h2:/compose-test
       - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - NETWORK_SHAPE=h2:10-0-0
     container_name: c1
     depends_on:
       - p1
       - h2
     volumes:
       - ./generated/c1:/generated
+    cap_add:
+      - NET_ADMIN
   c2:
     build: h
     environment:
       - REGISTER=h2:/compose-test
       - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - NETWORK_SHAPE=h2:10-0-0
     container_name: c2
     depends_on:
       - p1
       - h2
     volumes:
       - ./generated/c2:/generated
+    cap_add:
+      - NET_ADMIN
   c3:
     build: h
     environment:
       - REGISTER=h3:/compose-test
       - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - NETWORK_SHAPE=h3:20-5-0
     container_name: c3
     depends_on:
       - p1
       - h3
     volumes:
       - ./generated/c3:/generated
+    cap_add:
+      - NET_ADMIN
   c4:
     build: h
     environment:
       - REGISTER=h3:/compose-test
       - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - NETWORK_SHAPE=h3:20-10-90
     container_name: c4
     depends_on:
       - p1
       - h3
     volumes:
       - ./generated/c4:/generated
+    cap_add:
+      - NET_ADMIN
   h1:
     build: h
     environment:
       - NFD_BACKGROUND=no
       - REGISTER=p1:/compose-test
+      - NETWORK_SHAPE=p1:10-0-0 h2:30-0-0 h3:50-0-0
     container_name: h1
     depends_on:
       - p1
     volumes:
       - ./generated/h1:/generated
+    cap_add:
+      - NET_ADMIN
   h2:
     build: h
     environment:
       - NFD_BACKGROUND=no
       - REGISTER=h1:/compose-test
+      - NETWORK_SHAPE=c1:10-0-0 c2:10-0-0 h1:30-0-0
     container_name: h2
     depends_on:
       - h1
     volumes:
       - ./generated/h2:/generated
+    cap_add:
+      - NET_ADMIN
   h3:
     build: h
     environment:
       - NFD_BACKGROUND=no
       - REGISTER=h1:/compose-test
+      - NETWORK_SHAPE=c3:20-5-0 c4:20-10-90 h1:50-0-0
     container_name: h3
     depends_on:
       - h1
     volumes:
       - ./generated/h3:/generated
+    cap_add:
+      - NET_ADMIN
   p1:
     build: h
     environment:
       - ENTRYPOINT=ndnpingserver /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - NETWORK_SHAPE=h1:10-0-0
     container_name: p1
     volumes:
       - ./generated/p1:/generated
+    cap_add:
+      - NET_ADMIN

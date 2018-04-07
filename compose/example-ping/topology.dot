@@ -1,14 +1,14 @@
 digraph finite_state_machine {
     //layout="dot"
-    edge [ arrowhead=none ];
+    edge [ arrowhead=none fontsize=10 ];
 
     subgraph hubs { // all hubs should be listed here
         // hub nodes should follow format H + index 
         node [shape = square, rank = 5];
         H1; H2; H3;
         
-        H1 -> H2;
-        H1 -> H3;
+        H1 -> H2 [ label = "30ms" ];
+        H1 -> H3 [ label = "50ms" ];
     }
 
     subgraph producers { // all producers are listed here
@@ -18,7 +18,7 @@ digraph finite_state_machine {
 
         P1 [shape = circle, color = darkgreen];
     }
-    P1 -> H1;
+    P1 -> H1 [label = "10ms"];
 
     subgraph consumers { // all consumer clusters are lister here
         // consumer cluster nodes should follow format C + index
@@ -32,8 +32,8 @@ digraph finite_state_machine {
         C4 [label = "C4 <- P1"];
     }
 
-    C1 -> H2;
-    C2 -> H2;
-    C3 -> H3;
-    C4 -> H3;
+    C1 -> H2 [label = "10ms" ];
+    C2 -> H2 [label = "10ms" ];
+    C3 -> H3 [label = "20ms 5%" ];
+    C4 -> H3 [label = "20ms 10% 90kbit" ];
 }

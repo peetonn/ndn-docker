@@ -1,6 +1,8 @@
 FROM peetonn/ndn-docker:latest
 LABEL maintainer "Peter Gusev <peter@remap.ucla.edu>"
 
+RUN apt-get install -y iptables dnsutils iputils-ping
+
 COPY bootstrap.sh /usr/bin
 RUN mkdir -p /configs /generated \
     && cp /usr/local/etc/ndn/nfd.conf /configs \
@@ -12,6 +14,9 @@ ENV LOG_FILE=/generated/nfd.log
 ENV NFD_BACKGROUND=yes
 ENV REGISTER=""
 ENV ENTRYPOINT=""
+ENV NS_LATENCY=""
+ENV NS_BW=""
+ENV NS_LOSS=""
 
 WORKDIR /
-CMD bootstrap.sh -b $NFD_BACKGROUND -r $REGISTER -e "${ENTRYPOINT}"
+CMD bootstrap.sh -b $NFD_BACKGROUND -e "${ENTRYPOINT}" -r $REGISTER
