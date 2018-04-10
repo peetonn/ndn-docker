@@ -43,7 +43,7 @@ setup(
     ],
     keywords = 'ndndn NDN Docker',
     packages = find_packages(exclude=['docs', 'tests*']),
-    install_requires = ['docopt', 'networkx', 'pyyaml', 'dockerfile_parse'],
+    install_requires = ['docopt', 'networkx', 'pyyaml', 'pygraphviz'],
     entry_points = {
         'console_scripts': [
             'ndndn=ndndn.cli:main',
