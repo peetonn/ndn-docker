@@ -2,7 +2,9 @@
 
 import networkx as nx
 import networkx.drawing.nx_agraph as nx_dot
-import re
+import pygraphviz as pgv
+import re, copy
+import template
 
 class GraphParser(object):
     def __init__(self):
@@ -12,6 +14,13 @@ class GraphParser(object):
         topologyGraph = nx_dot.read_dot(dotFile)
         return self.parseTopologyGraph(topologyGraph)
 
+    def renderGraph(self, dotFile, renderFile):
+        g = pgv.AGraph(dotFile)
+        # try: 
+        g.draw(renderFile, prog='dot')
+        # except:
+            # print "Failed rendering dot file ", dotFile, " into ", renderFile
+
     def parseTopologyGraph(self, graph):
         nodes = {}
         for graphNode in graph.nodes():
@@ -20,7 +29,6 @@ class GraphParser(object):
                 nodes[graphNode] = node
         producerNodes = [x for x in nodes.values() if x['type'] == 'producer']
         consumerNodes = [x for x in nodes.values() if x['type'] == 'consumer']
-        hubNodes = [x for x in nodes.values() if x['type'] == 'hub']
         
         # replace 'fetch_from' from a simple list of names to list of producer nodes objects
         for node in consumerNodes:
@@ -43,8 +51,10 @@ class GraphParser(object):
         for (node1,node2,_),shape in linkShapes.iteritems():
             linkShape = self.parseShapeLabel(shape)
             if linkShape:
-                nodes[node1]['network_shape'][node2] = linkShape
-                nodes[node2]['network_shape'][node1] = linkShape
+                n1name = nodes[node1]['name']
+                n2name = nodes[node2]['name']
+                nodes[node1]['network_shape'][n2name] = linkShape
+                nodes[node2]['network_shape'][n1name] = linkShape
     
     def parseShapeLabel(self, label):
         p = re.compile('((?P<lat>\d+)ms\s*)?((?P<loss>\d+)%\s*)?((?P<bw>\d+)kbit\s*)?')
@@ -78,33 +88,30 @@ class GraphParser(object):
         for source in path:
             if idx < len(path):
                 sourceNode = nodes[source]
-                target = path[idx]
+                target = nodes[path[idx]]['name']
                 idx += 1
                 if not prefix in sourceNode['routes']:
                     sourceNode['routes'][prefix] = []
                 if not target in sourceNode['routes'][prefix]:
                     sourceNode['routes'][prefix].append(target)
 
-
     def parseGraphNode(self, graphNode, graph):
-        # nodeMark, nodeIdx = self.parseGraphNodeName(graphNode.name)
         nodeMark, nodeIdx = self.parseGraphNodeName(graphNode)
         allLabels = nx.get_node_attributes(graph, 'label')
         nodeLabel = allLabels[graphNode] if graphNode in allLabels else 'none'
-        NODES_TEMPLATES = {
-            'h':{'name':'h'+str(nodeIdx), 'type':'hub', 'index':nodeIdx, 'label': nodeLabel, 'graph_node': graphNode, 'routes': {}, 'network_shape': {}},
-            'p':{'name':'p'+str(nodeIdx), 'type':'producer', 'index':nodeIdx, 'label': nodeLabel, 'graph_node': graphNode, 'prefix': None, 'network_shape': {}},
-            'c':{'name':'c'+str(nodeIdx), 'type':'consumer', 'index':nodeIdx, 'label': nodeLabel, 'graph_node': graphNode, 'fetch_from': None, 'routes': {}, 'network_shape': {}}
-            }
-        try: 
-            node = NODES_TEMPLATES[nodeMark]
+        try:
+            node = copy.deepcopy(template.NODE_TEMPLATES[nodeMark])
+            node['name'] = nodeMark+str(nodeIdx)
+            node['index'] = nodeIdx
+            node['label'] = nodeLabel
+            node['graph_node'] = graphNode
             if nodeMark == 'c':
                 node = self.parseConsumerNode(node)
             if nodeMark == 'p':
                 node = self.parseProducerNode(node)
             return node
         except (KeyError):
-            print "Unknown node type: " + nodeMark + " for node " + graphNode.name
+            print "Unknown node type: " + nodeMark + " for node " + graphNode
             return None
 
     def parseGraphNodeName(self, name):
