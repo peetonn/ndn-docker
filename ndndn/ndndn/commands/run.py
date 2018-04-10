@@ -1,12 +1,15 @@
 """run command."""
 
-
-from json import dumps
+import subprocess, os
 from .base import Base
 
 class Run(Base):
     """Runs Docker-Compose setup"""
 
+    def __init__(self, options, *args, **kwargs):
+        Base.__init__(self, options, args, kwargs)
+        self.setupDir=self.options['SETUP_DIR'] if self.options['SETUP_DIR'] else self.options['--setup']
+
     def run(self):
-        print('Hello, run!')
-        print('You supplied the following options:', dumps(self.options, indent=2, sort_keys=True))
+        os.chdir(self.setupDir)
+        subprocess.call(["docker-compose", "up", "--build", "-d"])
