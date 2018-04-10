@@ -17,7 +17,7 @@ class Generate(Base):
         self.consumerEnv=self.options['--cenv']
         self.producerEnv=self.options['--penv']
         self.outDir=self.options['--out']
-        self.copySetups=False
+        self.copySetups=self.options['--copy']
 
     def run(self):
         self.generate(self.dotFile)
@@ -43,7 +43,10 @@ class Generate(Base):
             # write yml
             ymlWriter.writeYml(os.path.join(outDir, 'docker-compose.yml'))
         else:
-            print "Failed to create YML configuration for some reason"
+            print "Failed to create YAML configuration for some reason"
+        print u"experiment setup generated with no problems at", outDir
+        print "now, do this:"
+        print "\tcd", outDir, "&& ndndn run ."
 
     def createTestFolder(self):
         d = self.outDir

@@ -1,7 +1,7 @@
 """NDN Docker Net (ndndn)
 
 Usage:
-  ndndn generate -t=<dot_file> -a=<app_desc> [-h=<hub_desc> -c=<consumer_env> -p=<producer_env> -o=<out_dir>]
+  ndndn generate -t=<dot_file> -a=<app_desc> [-h=<hub_desc> -c=<consumer_env> -p=<producer_env> -o=<out_dir> --copy]
   ndndn run [SETUP_DIR | -s=<setup_dir>]
   ndndn --help
   ndndn --version
@@ -15,6 +15,7 @@ Options:
   -c,--cenv=<consumer_env>    Consumer environment file
   -p,--penv=<producer_env>    Producer environment file
   -o,--out=<out_dir>          Output directory [default: ./test1]
+  --copy                      Copy descriptions into output directory instead of symlinking them
   -s,--setup=<setup_dir>      Directory that contains generated experiment setup [default: ./]
 
 """
