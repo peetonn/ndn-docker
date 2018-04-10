@@ -23,11 +23,11 @@ _TBD describe node types_
 * macOS
 
 ```
-brew install pipenv multitail
+brew install multitail
 cd ndndn
-virtualenv env
-source env/bin/activate
-pip install -e .
+virtualenv env && source env/bin/activate
+pip install pypandoc
+pip install .
 ```
 
 * ubuntu

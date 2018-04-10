@@ -11,8 +11,12 @@ from ndndn import __version__
 
 
 this_dir = abspath(dirname(__file__))
-with open(join(this_dir, 'README.rst'), encoding='utf-8') as file:
-    long_description = file.read()
+with open(join(this_dir, 'README.md'), encoding='utf-8') as file:
+    try:
+        import pypandoc
+        long_description = pypandoc.convert_text(file.read(), 'rst', format='md')
+    except (IOError, ImportError):
+        long_description = ''
 
 setup(
     name = 'ndndn',
@@ -39,7 +43,7 @@ setup(
     ],
     keywords = 'ndndn NDN Docker',
     packages = find_packages(exclude=['docs', 'tests*']),
-    install_requires = ['docopt'],
+    install_requires = ['docopt', 'networkx', 'pyyaml', 'dockerfile_parse'],
     entry_points = {
         'console_scripts': [
             'ndndn=ndndn.cli:main',
