@@ -7,7 +7,7 @@ digraph finite_state_machine {
         node [shape = square, rank = 5];
         H1; H2; H3;
         
-        H1 -> H2 [ label = "30ms" ];
+        H1 -> H2 [ label = "10ms" ];
         H1 -> H3 [ label = "50ms" ];
     }
 
@@ -16,7 +16,7 @@ digraph finite_state_machine {
         rank = source
         node [shape = circle, color = darkgreen];
 
-        P1 [shape = circle, color = darkgreen];
+        P1 [shape = oval, color = darkgreen, label="P1: /ndndn/test"];
     }
     P1 -> H1 [label = "10ms"];
 
