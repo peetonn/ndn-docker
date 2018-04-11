@@ -4,7 +4,7 @@ import sys, os, shutil, copy
 from distutils.dir_util import copy_tree
 from .base import Base
 
-import classes
+from ndndn.commands.classes import GraphParser, EnvReader, YmlWriter
 
 class Generate(Base):
     """Generates Docker-Compose setup for NDN experiment"""
@@ -24,16 +24,16 @@ class Generate(Base):
     
     def generate(self, dotFile):
         # parse nodes from topology
-        graphParser = classes.GraphParser()
+        graphParser = GraphParser()
         self.nodes = graphParser.parseGraph(dotFile)
 
         # readin env files for producer and consumer
-        envReader = classes.EnvReader()
+        envReader = EnvReader()
         cenv = envReader.parse(self.consumerEnv) if self.consumerEnv else {}
         penv = envReader.parse(self.producerEnv) if self.producerEnv else {}
 
         # make yml
-        ymlWriter = classes.YmlWriter(self.nodes, cenv, penv)
+        ymlWriter = YmlWriter(self.nodes, cenv, penv)
 
         if ymlWriter.makeYml():
             # prepare out folder

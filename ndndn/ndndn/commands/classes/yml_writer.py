@@ -65,13 +65,13 @@ class YmlWriter(object):
         registerVar = self.makeRegisterVar(routes)
         if registerVar:
             env.append('REGISTER='+registerVar)
-        for var,val in otherEnv.iteritems():
+        for var,val in otherEnv.items():
             env.append(var+'='+val)
         return env
 
     def makeNetworkShapeVar(self, networkShapes):
         shapeVar = None
-        for targetNode, linkShape in networkShapes.iteritems():
+        for targetNode, linkShape in networkShapes.items():
             if shapeVar and len(shapeVar) > 0:
                 shapeVar += " "
             else:
@@ -84,7 +84,7 @@ class YmlWriter(object):
     
     def makeRegisterVar(self, routes):
         registerVar = None
-        for prefix, nodes in routes.iteritems():
+        for prefix, nodes in routes.items():
             for n in nodes:
                 if registerVar:
                     registerVar += " "

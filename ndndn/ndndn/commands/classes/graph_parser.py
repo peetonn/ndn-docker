@@ -4,7 +4,7 @@ import networkx as nx
 import networkx.drawing.nx_agraph as nx_dot
 import pygraphviz as pgv
 import re, copy
-import template
+from ndndn.commands.classes.template import NODE_TEMPLATES
 
 class GraphParser(object):
     def __init__(self):
@@ -45,7 +45,7 @@ class GraphParser(object):
 
     def addNetworkShaping(self, graph, nodes):
         linkShapes = nx.get_edge_attributes(graph, 'label')
-        for (node1,node2,_),shape in linkShapes.iteritems():
+        for (node1,node2,_),shape in linkShapes.items():
             linkShape = self.parseShapeLabel(shape)
             if linkShape:
                 n1name = nodes[node1]['name']
@@ -97,7 +97,7 @@ class GraphParser(object):
         allLabels = nx.get_node_attributes(graph, 'label')
         nodeLabel = allLabels[graphNode] if graphNode in allLabels else 'none'
         try:
-            node = copy.deepcopy(template.NODE_TEMPLATES[nodeMark])
+            node = copy.deepcopy(NODE_TEMPLATES[nodeMark])
             node['name'] = nodeMark+str(nodeIdx)
             node['index'] = nodeIdx
             node['label'] = nodeLabel

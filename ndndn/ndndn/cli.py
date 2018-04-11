@@ -32,7 +32,8 @@ def main():
     for (k, v) in options.items(): 
         if hasattr(ndndn.commands, k) and v:
             module = getattr(ndndn.commands, k)
-            ndndn.commands = getmembers(module, isclass)
-            command = [command[1] for command in ndndn.commands if command[0] != 'Base'][0]
+            commands = getmembers(module, isclass)
+            command = [(name,cls) for (name,cls) in commands if name.lower() == k][0][1]
+            ndndn.commands = commands
             command = command(options)
             command.run()
