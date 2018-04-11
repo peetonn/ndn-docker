@@ -7,10 +7,10 @@ digraph finite_state_machine {
         node [shape = circle, rank = 5];
         H1; H2; H3; H4; H5; H6;
         
-        H1 -> H3;
-        H1 -> H4;
-        H2 -> H5;
-        H2 -> H6;
+        H1 -> H3 [ label = "10ms" ];
+        H1 -> H4 [ label = "10ms" ];
+        H2 -> H5 [ label = "10ms" ];
+        H2 -> H6 [ label = "10ms" ];
     }
 
     subgraph producers { // all producers are listed here
