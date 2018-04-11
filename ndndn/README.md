@@ -82,7 +82,7 @@ docker-compose down
 
 ## ndnrtc (⌐■_■)
 
-> **!!!*** building ndnrtc image will take some time and space.
+> **!!!** building ndnrtc image will take some time and space.
 
 This is a quick example of how one can run [ndnrtc-client](https://github.com/remap/ndnrtc/tree/master/cpp/client) application on bintree4 topology (shown above) and collect results from this experiment:
 
