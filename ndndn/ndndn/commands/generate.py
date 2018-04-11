@@ -74,8 +74,8 @@ class Generate(Base):
             os.symlink(os.path.join('..', self.appDir), os.path.join(outDir, 'c'))
         else:
             copy_tree(self.hubDir, dirs[0])
-            copy_tree(self.hubDir, dirs[1])
-            copy_tree(self.hubDir, dirs[2])
+            copy_tree(self.appDir, dirs[1])
+            copy_tree(self.appDir, dirs[2])
 
 
 
