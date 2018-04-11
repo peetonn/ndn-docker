@@ -43,10 +43,10 @@ class Generate(Base):
             # write yml
             ymlWriter.writeYml(os.path.join(outDir, 'docker-compose.yml'))
         else:
-            print "Failed to create YAML configuration for some reason"
-        print u"experiment setup generated with no problems at", outDir
-        print "now, do this:"
-        print "\tcd", outDir, "&& ndndn run ."
+            print("Failed to create YAML configuration for some reason")
+        print("experiment setup generated with no problems at {0}".format(outDir))
+        print("now, do this:")
+        print("\tcd {0} && ndndn run .".format(outDir))
 
     def createTestFolder(self):
         d = self.outDir

@@ -16,10 +16,7 @@ class GraphParser(object):
 
     def renderGraph(self, dotFile, renderFile):
         g = pgv.AGraph(dotFile)
-        # try: 
         g.draw(renderFile, prog='dot')
-        # except:
-            # print "Failed rendering dot file ", dotFile, " into ", renderFile
 
     def parseTopologyGraph(self, graph):
         nodes = {}
@@ -81,7 +78,7 @@ class GraphParser(object):
                     path = nx.shortest_path(undirectedGraph, consumerNode['graph_node'], producerNode['graph_node'])
                     self.addRoutes(prefix, path, nodes)
                 except (nx.exception.NetworkXNoPath):
-                    print("No path between " + consumerNode['graph_node'] + " and " + producerNode['graph_node'])
+                    print("No path between {0} and {1}".format(consumerNode['graph_node'], producerNode['graph_node']))
 
     def addRoutes(self, prefix, path, nodes):
         idx = 1
@@ -111,7 +108,7 @@ class GraphParser(object):
                 node = self.parseProducerNode(node)
             return node
         except (KeyError):
-            print "Unknown node type: " + nodeMark + " for node " + graphNode
+            print("Unknown node type: {0} for node {1}".format(nodeMark, graphNode))
             return None
 
     def parseGraphNodeName(self, name):
@@ -138,7 +135,7 @@ class GraphParser(object):
                 producers.append(m+str(i))
             return producers
 
-        print "Consumer label " + label + " was not recognized"
+        print("Consumer label {0} was not recognized".format(label))
         return None
 
 
@@ -156,5 +153,5 @@ class GraphParser(object):
         if m:
             prefix = m.group('prefix')
             return prefix
-        print "Producer label " + label + " was not recognized"
+        print("Producer label {0} was not recognized".format(label))
         return None

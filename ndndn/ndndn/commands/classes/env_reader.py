@@ -11,5 +11,5 @@ class EnvReader(object):
                     if len(split) == 2:
                         env[split[0]] = split[1]
                     else:
-                        print "Can't parse line " + line + " in file " + envFile
+                        print("Can't parse line {0} in file {1}".format(line, envFile))
         return env
