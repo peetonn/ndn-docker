@@ -105,10 +105,14 @@ Generated files can be found in `ndnrtc-bintree4/generated` folder after experim
 
 This is a general description of how one should use `ndndn`.
 
-* Prepare app folder with `Dockerfile`  and supporting files for your application Docker image
-	* see more [here](#creating-app-image--‿-) on what  to consider when creating an app image
-	* it is implied that your app can work in consumer/producer mode OR that you provide two executables in your app Docker image
-* Generate experiment
+* **Prepare app description**
+
+  * app description is a folder that contains `Dockerfile` and supporting files for your application Docker image;
+  * see more [here](#creating-app-image--‿-) on what  to consider when creating an app image;
+  * it is implied that your app can work in consumer/producer mode OR that you provide two executables in your app Docker image;
+  * environment variables files `consumer.env` and `producer.env` should be used in order to define app's behavior as either consumer or producer.
+
+* **Generate experiment**
 
 ```
 ndndn generate --topology=topology.dot \
@@ -118,14 +122,19 @@ ndndn generate --topology=topology.dot \
 ```
 
   the command above will generate a folder (most likely called `experiment1`) with the following:
-    * `docker-compose.yml` — Docker Compose yml file describing your setup
-    * `topology.pdf`
-    * `h` — symlink or folder to the `hub` folder
-    * `c` — symlink or folder to the `app` folder
-    * `p` — symlink or folder to the `app` folder
+
+   * `docker-compose.yml` — Docker Compose yml file describing your setup
+   * `topology.pdf`
+   * `h` — symlink or folder to the `hub` folder
+   * `c` — symlink or folder to the `app` folder
+   * `p` — symlink or folder to the `app` folder
+    
 > whether it is a symlink or folder - can be altered by passing option `--copy` to `ndn generate` command.
-* Run experiment
-	* change to the newly generated folder and type:
+
+* **Run experiment**
+
+  * change to the newly generated folder and type:
+  
 ```
 ndndn run .
 ```
@@ -133,7 +142,7 @@ ndndn run .
 > `ndndn run` is just a wrapper around `docker-compose up -d —build` command.  
 > It has not been tested against different versions of docker-compose vs docker, so if you get any errors, please report an issue or contact author.  
 
-## collecting results
+## collecting results ᕙ(`▽´)ᕗ
 
 By default, docker will mount `/generated` folder from each container into a separate subfolder under `generated` folder on the host machine (like, `generated/p1`, `generated/c1`, `generated/c2` and so on). If you want to collect any results from your nodes, you should have your image configured to write to files in this directory.
 
