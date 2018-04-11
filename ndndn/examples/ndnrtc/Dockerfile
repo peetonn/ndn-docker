@@ -68,7 +68,7 @@ RUN chmod +x /ndnrtc/cpp/run.sh
 
 ENV NFD_BACKGROUND=yes
 ENV RUNTIME=10000
-ENV SIGNING_IDENTITY=/ndnrtc-test
+ENV SIGNING_IDENTITY=/ndndn/test
 ENV POLICY_FILE=tests/policy_config/rule.conf
 ENV INSTANCE_NAME=instance1
 ENV STAT_SAMPLING=100
