@@ -14,7 +14,7 @@ Options:
   -a,--app=<app_desc>         Path to a folder containing app description
   -c,--cenv=<consumer_env>    Consumer environment file
   -p,--penv=<producer_env>    Producer environment file
-  -o,--out=<out_dir>          Output directory [default: ./test1]
+  -o,--out=<out_dir>          Output directory
   --copy                      Copy descriptions into output directory instead of symlinking them
   -s,--setup=<setup_dir>      Directory that contains generated experiment setup [default: ./]
 
