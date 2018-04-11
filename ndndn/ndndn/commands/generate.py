@@ -66,7 +66,9 @@ class Generate(Base):
                 os.path.join(outDir, 'p'),
                 os.path.join(outDir, 'c')]
         for d in dirs:
-            if os.path.exists(d) or os.path.islink(d):
+            if os.path.islink(d):
+                os.remove(d)
+            elif os.path.isdir(d):
                 shutil.rmtree(d)
         if not self.copySetups:
             os.symlink(os.path.join('..', self.hubDir), os.path.join(outDir, 'h'))
