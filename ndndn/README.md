@@ -19,6 +19,8 @@ A `.dot` file describes network topology graph a user wish to run, by defining t
 >  ( ͡° ͜ʖ ͡°)ﾉ⌐■-■  
 
 ## build ( ´◔ ω◔`) ノシ
+* install [Docker](https://docs.docker.com/install/) and [Docker-Compose](https://docs.docker.com/compose/install/) first
+
 * macOS:
 
 ```
