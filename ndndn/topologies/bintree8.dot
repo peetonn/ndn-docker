@@ -7,10 +7,10 @@ digraph finite_state_machine {
         node [shape = circle, rank = 5];
         H1; H2; H3; H4; H5; H6;
         
-        H1 -> H3;
-        H1 -> H4;
-        H2 -> H5;
-        H2 -> H6;
+        H1 -> H3 [ label = "10ms" ];
+        H1 -> H4 [ label = "10ms" ];
+        H2 -> H5 [ label = "10ms" ];
+        H2 -> H6 [ label = "10ms" ];
     }
 
     subgraph producers { // all producers are listed here
@@ -20,8 +20,8 @@ digraph finite_state_machine {
 
         P1 [color = darkgreen, label="P1: /ndndn/test"];
     }
-    P1 -> H1;
-    P1 -> H2;
+    P1 -> H1 [ label = "10ms" ];
+    P1 -> H2 [ label = "10ms" ];
 
     subgraph consumers { // all consumer clusters are lister here
         // consumer cluster nodes should follow format C + index
@@ -39,12 +39,12 @@ digraph finite_state_machine {
         C8 [label = "C8 <- P1"];
     }
 
-    C1 -> H3;
-    C2 -> H3;
-    C3 -> H4;
-    C4 -> H4;
-    C5 -> H5;
-    C6 -> H5;
-    C7 -> H6;
-    C8 -> H6;
+    C1 -> H3 [ label = "10ms" ];
+    C2 -> H3 [ label = "10ms" ];
+    C3 -> H4 [ label = "10ms" ];
+    C4 -> H4 [ label = "10ms" ];
+    C5 -> H5 [ label = "10ms" ];
+    C6 -> H5 [ label = "10ms" ];
+    C7 -> H6 [ label = "10ms" ];
+    C8 -> H6 [ label = "10ms" ];
 }

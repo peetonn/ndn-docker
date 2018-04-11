@@ -1,8 +1,8 @@
 """NDN Docker Net (ndndn)
 
 Usage:
-  ndndn generate -t=<dot_file> -a=<app_desc> [-h=<hub_desc> -c=<consumer_env> -p=<producer_env> -o=<out_dir> --copy]
-  ndndn run [SETUP_DIR | -s=<setup_dir>]
+  ndndn generate -t <dot_file> -a <app_desc> [-h <hub_desc> -c <consumer_env> -p <producer_env> -o <out_dir> --copy]
+  ndndn run [SETUP_DIR | -s <setup_dir>]
   ndndn --help
   ndndn --version
 
