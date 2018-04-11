@@ -89,9 +89,9 @@ This is a quick example of how one can run [ndnrtc-client](https://github.com/re
 ```
 ndndn generate -t topologies/bintree4.dot \
                -a examples/ndnrtc/ \
-	       -c examples/ndnrtc/consumer.env \
-	       -p examples/ndnrtc/producer.env \
-	       -o ndnrtc-bintree4
+               -c examples/ndnrtc/consumer.env \
+               -p examples/ndnrtc/producer.env \
+               -o ndnrtc-bintree4
 cd ndnrtc-bintree4 && ndndn run .
 sleep 30 # run for 30 seconds
 docker-compose down
