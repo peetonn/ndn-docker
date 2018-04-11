@@ -11,7 +11,7 @@ RUN mkdir -p /configs /generated \
 ENV BOOTSTRAP_LOG=/generated/bootstrap.log
 ENV ENTRYPOINT_LOG=/generated/entrypoint.log
 ENV LOG_FILE=/generated/nfd.log
-ENV NFD_BACKGROUND=yes
+ENV NFD_BACKGROUND=no
 ENV REGISTER=""
 ENV ENTRYPOINT=""
 ENV NS_LATENCY=""

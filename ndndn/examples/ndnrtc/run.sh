@@ -4,7 +4,7 @@ echo "Starting ndnrtc-client with command-line arguments:"
 echo "\tconfig file: $CONFIG_FILE"
 echo "\tsigning identity: $SIGNING_IDENTITY"
 echo "\tpolicy file: $POLICY_FILE"
-echo "\truntime: $RUNTIM"
+echo "\truntime: $RUNTIME"
 echo "\tinstance name: $INSTANCE_NAME"
 echo "\tstatistics sampling: $STAT_SAMPLING"
 
