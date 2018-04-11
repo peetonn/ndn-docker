@@ -1,6 +1,6 @@
 """generate command."""
 
-import sys, os, shutil, copy
+import sys, os, shutil, copy, shutil
 from distutils.dir_util import copy_tree
 from .base import Base
 
@@ -67,7 +67,7 @@ class Generate(Base):
                 os.path.join(outDir, 'c')]
         for d in dirs:
             if os.path.exists(d) or os.path.islink(d):
-                os.remove(d)
+                shutil.rmtree(d)
         if not self.copySetups:
             os.symlink(os.path.join('..', self.hubDir), os.path.join(outDir, 'h'))
             os.symlink(os.path.join('..', self.appDir), os.path.join(outDir, 'p'))
