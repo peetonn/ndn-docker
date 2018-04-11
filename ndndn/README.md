@@ -106,7 +106,7 @@ Generated files can be found in `ndnrtc-bintree4/generated` folder after experim
 This is a general description of how one should use `ndndn`.
 
 * Prepare app folder with `Dockerfile`  and supporting files for your application Docker image
-	* see more [here]() on what  to consider when creating an app image
+	* see more [here](#creating-app-image--‿-) on what  to consider when creating an app image
 	* it is implied that your app can work in consumer/producer mode OR that you provide two executables in your app Docker image
 * Generate experiment
 
