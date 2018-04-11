@@ -1,0 +1,50 @@
+digraph finite_state_machine {
+    //layout="dot"
+    edge [ arrowhead=none fontsize=10 ];
+
+    subgraph hubs { // all hubs should be listed here
+        // hub nodes should follow format H + index 
+        node [shape = circle, rank = 5];
+        H1; H2; H3; H4; H5; H6;
+        
+        H1 -> H3 [ label = "10ms" ];
+        H1 -> H4 [ label = "10ms" ];
+        H2 -> H5 [ label = "10ms" ];
+        H2 -> H6 [ label = "10ms" ];
+    }
+
+    subgraph producers { // all producers are listed here
+        // producer nodes should follow format P + index
+        rank = source
+        node [shape=rect, color = darkgreen];
+
+        P1 [color = darkgreen, label="P1: /ndndn/test"];
+    }
+    P1 -> H1 [label = "40ms"];
+    P1 -> H2 [label = "40ms"];
+
+    subgraph consumers { // all consumer clusters are lister here
+        // consumer cluster nodes should follow format C + index
+        // the label for consumer cluster should follow format:
+        // 		Cx<number of consumers> <- <producer id> [<producer id>, ...]
+        rank = sink
+        node [shape = rect, color = brown];
+        C1 [label = "C1 <- P1"];
+        C2 [label = "C2 <- P1"];
+        C3 [label = "C3 <- P1"];
+        C4 [label = "C4 <- P1"];
+        C5 [label = "C5 <- P1"];
+        C6 [label = "C6 <- P1"];
+        C7 [label = "C7 <- P1"];
+        C8 [label = "C8 <- P1"];
+    }
+
+    C1 -> H3 [ label = "10ms" ];
+    C2 -> H3 [ label = "10ms" ];
+    C3 -> H4 [ label = "10ms" ];
+    C4 -> H4 [ label = "10ms" ];
+    C5 -> H5 [ label = "10ms" ];
+    C6 -> H5 [ label = "10ms" ];
+    C7 -> H6 [ label = "10ms" ];
+    C8 -> H6 [ label = "10ms" ];
+}

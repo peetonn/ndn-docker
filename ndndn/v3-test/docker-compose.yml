@@ -1,10 +1,10 @@
 version: '3'
 services:
   c1:
-    build: h
+    build: c
     environment:
-      - REGISTER=h2:/compose-test
-      - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - REGISTER=h2:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
     container_name: c1
     depends_on:
       - p1
@@ -12,10 +12,10 @@ services:
     volumes:
       - ./generated/c1:/generated
   c2:
-    build: h
+    build: c
     environment:
-      - REGISTER=h2:/compose-test
-      - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - REGISTER=h2:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
     container_name: c2
     depends_on:
       - p1
@@ -23,10 +23,10 @@ services:
     volumes:
       - ./generated/c2:/generated
   c3:
-    build: h
+    build: c
     environment:
-      - REGISTER=h3:/compose-test
-      - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - REGISTER=h3:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
     container_name: c3
     depends_on:
       - p1
@@ -34,10 +34,10 @@ services:
     volumes:
       - ./generated/c3:/generated
   c4:
-    build: h
+    build: c
     environment:
-      - REGISTER=h3:/compose-test
-      - ENTRYPOINT=ndnping /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+      - REGISTER=h3:/ndnrtc-test
+      - CONFIG_FILE=/configs/consumer.cfg
     container_name: c4
     depends_on:
       - p1
@@ -48,7 +48,7 @@ services:
     build: h
     environment:
       - NFD_BACKGROUND=no
-      - REGISTER=p1:/compose-test
+      - REGISTER=p1:/ndnrtc-test
     container_name: h1
     depends_on:
       - p1
@@ -58,7 +58,7 @@ services:
     build: h
     environment:
       - NFD_BACKGROUND=no
-      - REGISTER=h1:/compose-test
+      - REGISTER=h1:/ndnrtc-test
     container_name: h2
     depends_on:
       - h1
@@ -68,16 +68,14 @@ services:
     build: h
     environment:
       - NFD_BACKGROUND=no
-      - REGISTER=h1:/compose-test
+      - REGISTER=h1:/ndnrtc-test
     container_name: h3
     depends_on:
       - h1
     volumes:
       - ./generated/h3:/generated
   p1:
-    build: h
-    environment:
-      - ENTRYPOINT=ndnpingserver /compose-test/test > /generated/ping.log && tail -f /generated/ping.log
+    build: p
     container_name: p1
     volumes:
       - ./generated/p1:/generated
