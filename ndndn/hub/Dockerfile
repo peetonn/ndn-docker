@@ -8,6 +8,8 @@ RUN mkdir -p /configs /generated \
     && cp /usr/local/etc/ndn/nfd.conf /configs \
     && chmod +x /usr/bin/bootstrap.sh
 
+COPY nfd.conf /usr/local/etc/ndn/
+
 ENV BOOTSTRAP_LOG=/generated/bootstrap.log
 ENV ENTRYPOINT_LOG=/generated/entrypoint.log
 ENV LOG_FILE=/generated/nfd.log
