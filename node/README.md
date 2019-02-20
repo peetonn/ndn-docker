@@ -46,7 +46,7 @@ You can create faces from your local machine towards conatiner (this will only w
 
 ```
 nfdc face create tcp://localhost:6364
-nfdc face create tcp://localhost:6365
+nfdc face create udp://localhost:6365
 ```
 
 Or vice versa:
