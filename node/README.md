@@ -62,7 +62,7 @@ To start NDN container with custom config file, copy your config file to designa
 ```
 mkdir conf
 cp <path-to-config>/nfd.conf conf/
-docker run -d --rm --name hub1 -v $(pwd)/conf:/cong -e CONFIG=/conf/nfd.conf hub
+docker run -d --rm --name hub1 -v $(pwd)/conf:/conf -e CONFIG=/conf/nfd.conf hub
 ```
 
 ### Saving log to host machine
